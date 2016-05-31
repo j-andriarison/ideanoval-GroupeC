@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class ClassementBrains extends Classement implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private int idClassementBrains;
 	
-	@OneToMany(mappedBy="classementBrains")
+	@OneToMany(mappedBy="classementBrains", fetch=FetchType.EAGER)
 	private List<LigneClassementUtilisateur> ligneClassementUtilisateurs;
 	
 	public ClassementBrains() {

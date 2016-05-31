@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public abstract class ClassementIdee extends Classement implements Serializable 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idClassementIdee;
 
-	@OneToMany(mappedBy = "classementIdee")
+	@OneToMany(mappedBy = "classementIdee", fetch=FetchType.EAGER)
 	private List<LigneClassementIdee> ligneClassementIdee;
 
 	public ClassementIdee() {
