@@ -22,43 +22,50 @@ public class UtilisateurEtat implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idEtatUtilisateur;
-	
+
 	@Column(name = "etatUtilisateur", nullable = false, length = 30)
 	private String etatUtilisateur;
-	
+
 	@OneToMany(mappedBy = "etatUtilisateur")
 	List<Utilisateur> utilisateurs;
-	
-	
+
 	public UtilisateurEtat() {
+
 	}
-	public UtilisateurEtat(int idEtatUtilisateur, String etatUtilisateur) {
+
+	public UtilisateurEtat(String etatUtilisateur) {
 		super();
-		this.idEtatUtilisateur = idEtatUtilisateur;
+		this.idEtatUtilisateur = -1;
 		this.etatUtilisateur = etatUtilisateur;
 	}
+
 	public String getEtatUtilisateur() {
 		return etatUtilisateur;
 	}
+
 	public int getIdEtatUtilisateur() {
 		return idEtatUtilisateur;
 	}
+
 	public void setEtatUtilisateur(String etatUtilisateur) {
 		this.etatUtilisateur = etatUtilisateur;
 	}
+
 	public void setIdEtatUtilisateur(int idEtatUtilisateur) {
 		this.idEtatUtilisateur = idEtatUtilisateur;
 	}
+
 	public List<Utilisateur> getUtilisateurs() {
 		return utilisateurs;
 	}
+
 	public void setUtilisateurs(List<Utilisateur> utilisateurs) {
 		this.utilisateurs = utilisateurs;
 	}
+
 	@Override
 	public String toString() {
 		return "EtatUtilisateur [idEtatUtilisateur=" + idEtatUtilisateur + ", etatUtilisateur=" + etatUtilisateur + "]";
 	}
-	
-	
+
 }
