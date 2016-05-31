@@ -31,4 +31,22 @@ public class ClassementBrains extends Classement implements Serializable {
 	public ClassementBrains() {
 	}
 
+	public int getIdClassementBrains() {
+		return idClassementBrains;
+	}
+
+	public void setIdClassementBrains(int idClassementBrains) {
+		this.idClassementBrains = idClassementBrains;
+	}
+
+	public List<LigneClassementUtilisateur> getLigneClassementUtilisateurs() {
+		return ligneClassementUtilisateurs;
+	}
+
+	public void setLigneClassementUtilisateurs(List<LigneClassementUtilisateur> ligneClassementUtilisateurs) {
+		this.ligneClassementUtilisateurs = ligneClassementUtilisateurs;
+	}
+	
+	
+
 }
