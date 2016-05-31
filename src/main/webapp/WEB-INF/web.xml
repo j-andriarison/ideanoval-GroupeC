@@ -1,0 +1,23 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<display-name>Archetype Created Web Application</display-name>
+	
+<!-- 	<welcome-file-list> -->
+<!-- 		<welcome-file>hello</welcome-file> -->
+<!-- 	</welcome-file-list> -->
+	
+	<servlet>
+		<servlet-name>Hello</servlet-name>
+		<display-name>hello</display-name>
+		<description></description>
+		<servlet-class>fr.humanbooster.ideanoval.controllers.Hello</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Hello</servlet-name>
+		<url-pattern>/hello</url-pattern>
+	</servlet-mapping>
+</web-app>

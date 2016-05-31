@@ -1,0 +1,20 @@
+(story) En tant que visiteur, je veux créer un compte minimal pour être utilisateur enregistré et pouvoir poster des idées:
+(tache):- créer un formulaire
+		- validation de formulaire
+		- insertion dans la BD
+		- retour à la page de connexion
+
+En tant qu'utilisateur enregistré, je veux proposer une idée innovante
+En tant qu'utilisateur enregistré, je veux filtrer une idée proposée par catégorie
+En tant qu'utilisateur enregistré, je veux noter une idée proposée
+En tant qu'utilisateur enregistré, je veux commenter une idée proposée
+En tant qu'utilisateur, je veux voir le classement des 	3 meilleures idées (Top), 
+														3 utilisateurs ayant plus d'idées (Brains), 
+														3 idées ayant plus de commentaires (Buzz)
+En tant qu'administrateur, je veux désactiver une idée, commentaire
+En tant qu'administrateur, je veux lister une idée, commentaire 
+	sur lesquelles il a été alerté et décider ou non de les désactiver
+En tant qu'administrateur, je veux afficher la getstion des catégories, 
+														des utilisateurs 
+														et des idées en alerte
+En tant qu'utilisateur enregistré, je veux alerter une idée ou un commentaire inapproprié à l'administrateur

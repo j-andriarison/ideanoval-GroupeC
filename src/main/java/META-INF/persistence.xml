@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="Ideanoval">
+		<class>fr.humanbooster.ideanoval.business.Alerte</class>
+		<class>fr.humanbooster.ideanoval.business.AlerteCommentaire</class>
+		<class>fr.humanbooster.ideanoval.business.AlerteIdee</class>
+		<class>fr.humanbooster.ideanoval.business.ClassementBrains</class>
+		<class>fr.humanbooster.ideanoval.business.ClassementBuzzs</class>
+		<class>fr.humanbooster.ideanoval.business.ClassementTops</class>
+		<class>fr.humanbooster.ideanoval.business.Commentaire</class>
+		<class>fr.humanbooster.ideanoval.business.Idee</class>
+		<class>fr.humanbooster.ideanoval.business.IdeeCategorie</class>
+		<class>fr.humanbooster.ideanoval.business.Utilisateur</class>
+		<class>fr.humanbooster.ideanoval.business.UtilisateurEtat</class>
+		<class>fr.humanbooster.ideanoval.business.UtilisateurRole</class>
+		<class>fr.humanbooster.ideanoval.business.Vote</class>
+		<class>fr.humanbooster.ideanoval.business.LigneClassementIdee</class>
+		<class>fr.humanbooster.ideanoval.business.LigneClassementUtilisateur</class>
+	</persistence-unit>
+</persistence>
