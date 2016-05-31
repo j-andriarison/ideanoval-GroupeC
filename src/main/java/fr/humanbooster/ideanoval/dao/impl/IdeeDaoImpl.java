@@ -73,7 +73,7 @@ public class IdeeDaoImpl implements IdeeDao {
 	}
 
 	@Override
-	@Transactional
+	@Transactional (readOnly = true)
 	public Idee findIdeeById(int idIdee) {
 		return (Idee) sessionFactory.openSession().get(Idee.class, idIdee);
 	}

@@ -61,7 +61,7 @@ public class IdeeCategorieDaoImpl implements IdeeCategorieDao{
 	}
 
 	@Override
-	@Transactional
+	@Transactional (readOnly = true)
 	public IdeeCategorie findIdeeCategorieById(int idIdeeCategorie) {
 		return (IdeeCategorie) sessionFactory.openSession().get(IdeeCategorie.class, idIdeeCategorie);
 	}
