@@ -4,8 +4,9 @@ import fr.humanbooster.ideanoval.business.ClassementTops;
 
 public interface ClassementTopsDao {
 
+	public ClassementTops getClassementTops();
 	public boolean addClassementTops(ClassementTops classementTops);
-	public boolean updateClassementTops(ClassementTops classementTops);
-	public boolean deleteClassementTops(ClassementTops classementTops);
+	public void updateClassementTops(ClassementTops classementTops);
+	public void deleteClassementTops(ClassementTops classementTops);
 	
 }

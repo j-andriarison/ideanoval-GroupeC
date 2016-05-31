@@ -3,6 +3,7 @@ package fr.humanbooster.ideanoval.dao.impl;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.humanbooster.ideanoval.business.ClassementBrains;
 import fr.humanbooster.ideanoval.dao.ClassementBrainsDao;
@@ -22,6 +23,13 @@ public class ClassementBrainsDaoImpl implements ClassementBrainsDao {
 		this.sessionFactory = sessionFactory;
 	}
 
+	@Transactional(readOnly=true)
+	@Override
+	public ClassementBrains getClassementBrains() {
+		return (ClassementBrains) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1").uniqueResult();
+	}
+
+	@Transactional
 	@Override
 	public boolean addClassementBrains(ClassementBrains classementBrains) {
 		Integer id = (int) (sessionFactory.getCurrentSession().save(classementBrains));
@@ -33,16 +41,16 @@ public class ClassementBrainsDaoImpl implements ClassementBrainsDao {
 		}
 	}
 
+	@Transactional
 	@Override
-	public boolean updateClassementBrains(ClassementBrains classementBrains) {
+	public void updateClassementBrains(ClassementBrains classementBrains) {
 		sessionFactory.getCurrentSession().update(classementBrains);
-		return true;
 	}
 
+	@Transactional
 	@Override
-	public boolean deleteClassementBrains(ClassementBrains classementBrains) {
+	public void deleteClassementBrains(ClassementBrains classementBrains) {
 		sessionFactory.openSession().delete(classementBrains);
-		return true;
 	}
 
 }

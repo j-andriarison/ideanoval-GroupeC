@@ -3,6 +3,7 @@ package fr.humanbooster.ideanoval.dao.impl;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.humanbooster.ideanoval.business.ClassementTops;
 import fr.humanbooster.ideanoval.dao.ClassementTopsDao;
@@ -22,6 +23,13 @@ public class ClassementTopsDaoImpl implements ClassementTopsDao {
 		this.sessionFactory = sessionFactory;
 	}
 
+	@Transactional(readOnly=true)
+	@Override
+	public ClassementTops getClassementTops() {
+		return (ClassementTops) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1").uniqueResult();
+	}
+
+	@Transactional
 	@Override
 	public boolean addClassementTops(ClassementTops classementTops) {
 		Integer id = (int) (sessionFactory.getCurrentSession().save(classementTops));
@@ -33,16 +41,16 @@ public class ClassementTopsDaoImpl implements ClassementTopsDao {
 		}
 	}
 
+	@Transactional
 	@Override
-	public boolean updateClassementTops(ClassementTops classementTops) {
+	public void updateClassementTops(ClassementTops classementTops) {
 		sessionFactory.getCurrentSession().update(classementTops);
-		return true;
 	}
 
+	@Transactional
 	@Override
-	public boolean deleteClassementTops(ClassementTops classementTops) {
+	public void deleteClassementTops(ClassementTops classementTops) {
 		sessionFactory.openSession().delete(classementTops);
-		return true;
 	}
 
 }

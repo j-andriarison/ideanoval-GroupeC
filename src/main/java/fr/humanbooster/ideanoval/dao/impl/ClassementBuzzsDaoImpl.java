@@ -3,6 +3,7 @@ package fr.humanbooster.ideanoval.dao.impl;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.humanbooster.ideanoval.business.ClassementBuzzs;
 import fr.humanbooster.ideanoval.dao.ClassementBuzzsDao;
@@ -22,6 +23,13 @@ public class ClassementBuzzsDaoImpl implements ClassementBuzzsDao {
 		this.sessionFactory = sessionFactory;
 	}
 
+	@Transactional(readOnly=true)
+	@Override
+	public ClassementBuzzs getClassementBuzzs() {
+		return (ClassementBuzzs) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1").uniqueResult();
+	}
+
+	@Transactional
 	@Override
 	public boolean addClassementBuzzs(ClassementBuzzs classementBuzzs) {
 		Integer id = (int) (sessionFactory.getCurrentSession().save(classementBuzzs));
@@ -33,16 +41,16 @@ public class ClassementBuzzsDaoImpl implements ClassementBuzzsDao {
 		}
 	}
 
+	@Transactional
 	@Override
-	public boolean updateClassementBuzzs(ClassementBuzzs classementBuzzs) {
+	public void updateClassementBuzzs(ClassementBuzzs classementBuzzs) {
 		sessionFactory.getCurrentSession().update(classementBuzzs);
-		return true;
 	}
 
+	@Transactional
 	@Override
-	public boolean deleteClassementBuzzs(ClassementBuzzs classementBuzzs) {
+	public void deleteClassementBuzzs(ClassementBuzzs classementBuzzs) {
 		sessionFactory.openSession().delete(classementBuzzs);
-		return true;
 	}
 
 }
