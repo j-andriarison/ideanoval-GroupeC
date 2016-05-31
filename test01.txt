@@ -1,2 +1,7 @@
 Roger!
+<<<<<<< HEAD
 Test merge!!
+=======
+de jean
+Nico ok
+>>>>>>> origin/master
