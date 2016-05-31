@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.humanbooster.ideanoval.business.UtilisateurEtat;
 import fr.humanbooster.ideanoval.dao.UtilisateurEtatDao;
@@ -24,6 +25,7 @@ public class UtilisateurEtatDaoImpl implements UtilisateurEtatDao {
 		this.sessionFactory = sessionFactory;
 	}
 
+	@Transactional
 	@Override
 	public boolean addUtilisateurEtat(UtilisateurEtat utilisateurEtat) {
 		Integer id = (int) (sessionFactory.getCurrentSession().save(utilisateurEtat));
@@ -35,18 +37,21 @@ public class UtilisateurEtatDaoImpl implements UtilisateurEtatDao {
 		}
 	}
 
+	@Transactional
 	@Override
 	public boolean updateUtilisateurEtat(UtilisateurEtat utilisateurEtat) {
 		sessionFactory.getCurrentSession().update(utilisateurEtat);
 		return true;
 	}
 
+	@Transactional
 	@Override
 	public boolean deleteUtilisateurEtat(UtilisateurEtat utilisateurEtat) {
 		sessionFactory.openSession().delete(utilisateurEtat);
 		return true;
 	}
 
+	@Transactional(readOnly=true)
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<UtilisateurEtat> getAllEtats() {
