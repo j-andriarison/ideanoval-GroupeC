@@ -27,11 +27,19 @@ import javax.persistence.TemporalType;
 public class Utilisateur implements Serializable {
 
 	private static final long serialVersionUID = 1683870407253730127L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int idUtilisateur;
+	
 	@OneToMany
-	 private List<Alerte> alertes;
+	private List<Idee> idees;
+	
+	@OneToMany
+	private List<Alerte> alertes;
 	
 	@ManyToOne
-	 private ClassementBrains classementBrain;
+	private ClassementBrains classementBrain;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dateInscription", nullable = false, length = 19)
@@ -46,11 +54,6 @@ public class Utilisateur implements Serializable {
 	
 	@ManyToOne
 	private UtilisateurEtat etatUtilisateur;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idUtilisateur;
-
 	
 	@Column(name = "motDePasse", nullable = false, length = 20)
 	private String motDePasse;

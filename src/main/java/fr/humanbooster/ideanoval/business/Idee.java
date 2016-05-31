@@ -31,6 +31,7 @@ public class Idee implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idIdee;
+	
 	@ManyToOne
 	@JoinColumn(name = "idCategorie")
 	private IdeeCategorie categorie;
@@ -42,7 +43,7 @@ public class Idee implements Serializable {
 	private String description;
 	
 	@Temporal(TemporalType.TIMESTAMP)	
-	@Column(name = "dateInscription", nullable = false, length = 19)
+	@Column(name = "dateCreation", nullable = false, length = 19)
 	private Date dateCreation;
 
 	@Column(name = "estDesactivee", nullable = false)
@@ -66,7 +67,9 @@ public class Idee implements Serializable {
 	@OneToMany(mappedBy ="idee")
 	private List<Vote> votes;
 
-
+	@ManyToOne
+	@JoinColumn(name = "idUtilisateur")
+	private Utilisateur utilisateur;
 
 
 	public Idee(IdeeCategorie categorie, String titre, String description, Date dateCreation, Boolean estDesactivee,
