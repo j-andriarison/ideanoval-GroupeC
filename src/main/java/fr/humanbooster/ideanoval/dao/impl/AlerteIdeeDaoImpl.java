@@ -49,6 +49,7 @@ public class AlerteIdeeDaoImpl implements AlerteIdeeDao {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<AlerteIdee> findAlerteIdeeAll() {
 		return sessionFactory.getCurrentSession().createCriteria(AlerteIdee.class).list();

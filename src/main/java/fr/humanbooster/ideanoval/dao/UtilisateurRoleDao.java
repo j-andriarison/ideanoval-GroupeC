@@ -7,7 +7,9 @@ import fr.humanbooster.ideanoval.business.UtilisateurRole;
 public interface UtilisateurRoleDao {
 	// INSERT
 	public boolean addUtilisateurRole(UtilisateurRole utilisateurRole);
+	public boolean updateUtilisateurRole(UtilisateurRole utilisateurRole);
+	public boolean deleteUtilisateurRole(UtilisateurRole utilisateurRole);
 
 	// SELECT
-	public List<UtilisateurRole> findAll();
+	public List<UtilisateurRole> getAllRole();
 }
