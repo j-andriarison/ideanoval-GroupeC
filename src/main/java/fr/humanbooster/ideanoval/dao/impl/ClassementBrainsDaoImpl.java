@@ -10,7 +10,7 @@ import fr.humanbooster.ideanoval.dao.ClassementBrainsDao;
 
 @Repository
 public class ClassementBrainsDaoImpl implements ClassementBrainsDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -18,22 +18,18 @@ public class ClassementBrainsDaoImpl implements ClassementBrainsDao {
 		super();
 	}
 
-	public ClassementBrainsDaoImpl(SessionFactory sessionFactory) {
-		super();
-		this.sessionFactory = sessionFactory;
-	}
-
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	@Override
 	public ClassementBrains getClassementBrains() {
-		return (ClassementBrains) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1").uniqueResult();
+		return (ClassementBrains) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1")
+				.uniqueResult();
 	}
 
 	@Transactional
 	@Override
 	public boolean addClassementBrains(ClassementBrains classementBrains) {
 		Integer id = (int) (sessionFactory.getCurrentSession().save(classementBrains));
-		if( id > -1 ) {
+		if (id > -1) {
 			classementBrains.setIdClassementBrains(id);
 			return true;
 		} else {

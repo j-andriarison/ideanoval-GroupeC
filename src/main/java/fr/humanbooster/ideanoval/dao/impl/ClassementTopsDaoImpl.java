@@ -10,7 +10,7 @@ import fr.humanbooster.ideanoval.dao.ClassementTopsDao;
 
 @Repository
 public class ClassementTopsDaoImpl implements ClassementTopsDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -18,22 +18,18 @@ public class ClassementTopsDaoImpl implements ClassementTopsDao {
 		super();
 	}
 
-	public ClassementTopsDaoImpl(SessionFactory sessionFactory) {
-		super();
-		this.sessionFactory = sessionFactory;
-	}
-
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	@Override
 	public ClassementTops getClassementTops() {
-		return (ClassementTops) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1").uniqueResult();
+		return (ClassementTops) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1")
+				.uniqueResult();
 	}
 
 	@Transactional
 	@Override
 	public boolean addClassementTops(ClassementTops classementTops) {
 		Integer id = (int) (sessionFactory.getCurrentSession().save(classementTops));
-		if( id > -1 ) {
+		if (id > -1) {
 			classementTops.setIdClassementIdee(id);
 			return true;
 		} else {

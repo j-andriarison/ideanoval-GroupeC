@@ -10,7 +10,7 @@ import fr.humanbooster.ideanoval.dao.ClassementBuzzsDao;
 
 @Repository
 public class ClassementBuzzsDaoImpl implements ClassementBuzzsDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -18,22 +18,18 @@ public class ClassementBuzzsDaoImpl implements ClassementBuzzsDao {
 		super();
 	}
 
-	public ClassementBuzzsDaoImpl(SessionFactory sessionFactory) {
-		super();
-		this.sessionFactory = sessionFactory;
-	}
-
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	@Override
 	public ClassementBuzzs getClassementBuzzs() {
-		return (ClassementBuzzs) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1").uniqueResult();
+		return (ClassementBuzzs) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1")
+				.uniqueResult();
 	}
 
 	@Transactional
 	@Override
 	public boolean addClassementBuzzs(ClassementBuzzs classementBuzzs) {
 		Integer id = (int) (sessionFactory.getCurrentSession().save(classementBuzzs));
-		if( id > -1 ) {
+		if (id > -1) {
 			classementBuzzs.setIdClassementIdee(id);
 			return true;
 		} else {
