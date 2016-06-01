@@ -1,6 +1,5 @@
 package fr.humanbooster.ideanoval.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +10,10 @@ import fr.humanbooster.ideanoval.business.Commentaire;
 import fr.humanbooster.ideanoval.business.Idee;
 import fr.humanbooster.ideanoval.business.Utilisateur;
 import fr.humanbooster.ideanoval.business.UtilisateurEtat;
-import fr.humanbooster.ideanoval.service.UtilisateurService;
 import fr.humanbooster.ideanoval.dao.CommentaireDao;
 import fr.humanbooster.ideanoval.dao.IdeeDao;
 import fr.humanbooster.ideanoval.dao.UtilisateurDao;
+import fr.humanbooster.ideanoval.service.UtilisateurService;
 
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
@@ -27,7 +26,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	private CommentaireDao commentaireDao;
 
 	/**
-	 * paramètre : un Utilisateur retourne : true si l'utilisateur est crée,
+	 * paramètre : un Utilisateur 
+	 * retourne : true si l'utilisateur est crée,
 	 * false si le pseudo et/ou le mail sont déjà utilisés
 	 */
 	@Override
@@ -62,7 +62,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	/**
-	 * paramètre : l'Utilisateur à supprimer retourne : true si l'utilisateur
+	 * paramètre : l'Utilisateur à supprimer 
+	 * retourne : true si l'utilisateur
 	 * est créé
 	 */
 	@Override
@@ -71,30 +72,44 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		return utilisateurDao.deleteUtilisateur(utilisateur);
 	}
 
+	/**
+	 * paramètre : le pseudo de l'utilisateur recherché
+	 * retourne : l'utilisateur du pseudo
+	 */
 	@Override
 	@Transactional
 	public Utilisateur getUtilisateurByPseudo(String pseudo) {
 		return utilisateurDao.findUtilisateurByPseudo(pseudo);
 	}
 
+	/**
+	 * paramètre : le mail de l'utilisateur recherché
+	 * retourne : l'utilisateur du mail
+	 */
 	@Override
 	@Transactional
 	public Utilisateur getUtilisateurByMail(String mail) {
 		return utilisateurDao.findUtilisateurByMail(mail);
 	}
 
+	/**
+	 * paramètre : un Utilisateur
+	 * retourne : la liste des idées postées par cet utilisateur
+	 */
 	@Override
 	@Transactional
-	public List<Idee> getIdeesUtilisateur(Utilisateur utilisateur) {
-
-		return null;
+	public List<Idee> getIdeesUtilisateur(Utilisateur utilisateur) {	
+		return ideeDao.findIdeesByIdUtilisateur(utilisateur.getIdUtilisateur());
 	}
 
+	/**
+	 * paramètre : un Utilisateur
+	 * retourne : la liste des commentaires postés par cet utilisateur
+	 */
 	@Override
 	@Transactional
 	public List<Commentaire> getCommentairesUtilisateur(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+		return commentaireDao.findCommentairesUtilisateur(utilisateur);
 	}
 
 }

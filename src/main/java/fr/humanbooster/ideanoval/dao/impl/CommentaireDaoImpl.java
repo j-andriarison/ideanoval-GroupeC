@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fr.humanbooster.ideanoval.business.Commentaire;
 import fr.humanbooster.ideanoval.business.Idee;
+import fr.humanbooster.ideanoval.business.Utilisateur;
 import fr.humanbooster.ideanoval.dao.CommentaireDao;
 
 @Repository
@@ -92,6 +93,19 @@ public class CommentaireDaoImpl implements CommentaireDao {
 			Query query = sessionFactory.getCurrentSession()
 					.createQuery("SELECT c FROM Commentaire c WHERE c.idIdee=:iI");
 			query.setInteger("iI", idee.getIdIdee());
+			return query.list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public List<Commentaire> findCommentairesUtilisateur(Utilisateur utilisateur) {
+		try {
+			Query query = sessionFactory.getCurrentSession()
+					.createQuery("SELECT c FROM Commentaire c WHERE c.idUtilisateur=:iU");
+			query.setInteger("iU", utilisateur.getIdUtilisateur());
 			return query.list();
 		} catch (HibernateException e) {
 			e.printStackTrace();

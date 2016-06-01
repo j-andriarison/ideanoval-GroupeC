@@ -1,6 +1,7 @@
 package fr.humanbooster.ideanoval.dao.impl;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -80,14 +81,28 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	@Transactional(readOnly = true)
 	public Utilisateur findUtilisateurByPseudo(String pseudo) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery("FROM Utilisateur u WHERE u.pseudo=:Up");
+			query.setString("Up", pseudo);
+			Utilisateur utilisateur = (Utilisateur) query.uniqueResult();
+			return utilisateur;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}	
 	}
 
 	@Transactional(readOnly = true)
 	public Utilisateur findUtilisateurByMail(String mail) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Query query = sessionFactory.getCurrentSession().createQuery("FROM Utilisateur u WHERE u.mail=:Um");
+			query.setString("Um", mail);
+			Utilisateur utilisateur = (Utilisateur) query.uniqueResult();
+			return utilisateur;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}	
 	}
 
 }
