@@ -1,6 +1,5 @@
 package fr.humanbooster.ideanoval.dao.impl;
 
-import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,54 +21,32 @@ public class ClassementBrainsDaoImpl implements ClassementBrainsDao {
 	@Transactional(readOnly = true)
 	@Override
 	public ClassementBrains getClassementBrains() {
-		try {
-			return (ClassementBrains) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1")
-					.uniqueResult();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			return null;
-		}
+		return (ClassementBrains) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1")
+				.uniqueResult();
 	}
 
 	@Transactional
 	@Override
 	public boolean addClassementBrains(ClassementBrains classementBrains) {
-		try {
-			Integer id = (int) (sessionFactory.getCurrentSession().save(classementBrains));
-			if (id > -1) {
-				classementBrains.setIdClassementBrains(id);
-				return true;
-			} else {
-				return false;
-			}
-		} catch (HibernateException e) {
-			e.printStackTrace();
+		Integer id = (int) (sessionFactory.getCurrentSession().save(classementBrains));
+		if (id > -1) {
+			classementBrains.setIdClassementBrains(id);
+			return true;
+		} else {
 			return false;
 		}
 	}
 
 	@Transactional
 	@Override
-	public boolean updateClassementBrains(ClassementBrains classementBrains) {
-		try {
-			sessionFactory.getCurrentSession().update(classementBrains);
-			return true;
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			return false;
-		}
+	public void updateClassementBrains(ClassementBrains classementBrains) {
+		sessionFactory.getCurrentSession().update(classementBrains);
 	}
 
 	@Transactional
 	@Override
-	public boolean deleteClassementBrains(ClassementBrains classementBrains) {
-		try {
-			sessionFactory.getCurrentSession().delete(classementBrains);
-			return true;
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			return false;
-		}
+	public void deleteClassementBrains(ClassementBrains classementBrains) {
+		sessionFactory.openSession().delete(classementBrains);
 	}
 
 }
