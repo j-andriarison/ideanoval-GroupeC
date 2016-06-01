@@ -1,9 +1,5 @@
 package fr.humanbooster.ideanoval.dao;
 
-import java.util.List;
-
-import fr.humanbooster.ideanoval.business.Commentaire;
-import fr.humanbooster.ideanoval.business.Idee;
 import fr.humanbooster.ideanoval.business.Utilisateur;
 
 public interface UtilisateurDao {
@@ -22,10 +18,8 @@ public interface UtilisateurDao {
 	// SELECT
 	public Utilisateur findUtilisateurById(int idUtilisateur);
 
-	public List<Idee> findIdeesUtilisateur(Utilisateur utilisateur);
-
-	public List<Commentaire> findCommentairesUtilisateur(Utilisateur utilisateur);
 	public Utilisateur findUtilisateurByPseudo(String pseudo);
+
 	public Utilisateur findUtilisateurByMail(String mail);
 
 }
