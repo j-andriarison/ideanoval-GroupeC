@@ -5,11 +5,15 @@ import java.util.List;
 import fr.humanbooster.ideanoval.business.AlerteCommentaire;
 
 public interface AlerteCommentaireDao {
-	//INSERT
-	public boolean addAlerteCommentaire(AlerteCommentaire alerteCommentaire); 
-	//UPDATE
+	// INSERT
+	public boolean addAlerteCommentaire(AlerteCommentaire alerteCommentaire);
+
+	// UPDATE
 	public boolean updateAlerteCommentaire(AlerteCommentaire alerteCommentaire);
-	//SELECT
+
+	// SELECT
 	public AlerteCommentaire findAlerteCommentaire(int idAlerteCommentaire);
+
 	public List<AlerteCommentaire> findAlerteCommentaireAll();
+
 }

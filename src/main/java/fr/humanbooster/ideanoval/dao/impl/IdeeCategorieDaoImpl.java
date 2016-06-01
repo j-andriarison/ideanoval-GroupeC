@@ -10,18 +10,13 @@ import fr.humanbooster.ideanoval.business.IdeeCategorie;
 import fr.humanbooster.ideanoval.dao.IdeeCategorieDao;
 
 @Repository
-public class IdeeCategorieDaoImpl implements IdeeCategorieDao{
+public class IdeeCategorieDaoImpl implements IdeeCategorieDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public IdeeCategorieDaoImpl() {
 		super();
-	}
-
-	public IdeeCategorieDaoImpl(SessionFactory sessionFactory) {
-		super();
-		this.sessionFactory = sessionFactory;
 	}
 
 	@Override
@@ -32,8 +27,8 @@ public class IdeeCategorieDaoImpl implements IdeeCategorieDao{
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	@Override
@@ -44,8 +39,8 @@ public class IdeeCategorieDaoImpl implements IdeeCategorieDao{
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	@Override
@@ -56,14 +51,19 @@ public class IdeeCategorieDaoImpl implements IdeeCategorieDao{
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	@Override
-	@Transactional (readOnly = true)
+	@Transactional(readOnly = true)
 	public IdeeCategorie findIdeeCategorieById(int idIdeeCategorie) {
-		return (IdeeCategorie) sessionFactory.openSession().get(IdeeCategorie.class, idIdeeCategorie);
+		try {
+			return (IdeeCategorie) sessionFactory.openSession().get(IdeeCategorie.class, idIdeeCategorie);
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

@@ -14,14 +14,9 @@ public class IdeeDaoImpl implements IdeeDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-		
+
 	public IdeeDaoImpl() {
 		super();
-	}
-
-	public IdeeDaoImpl(SessionFactory sessionFactory) {
-		super();
-		this.sessionFactory = sessionFactory;
 	}
 
 	@Override
@@ -32,8 +27,8 @@ public class IdeeDaoImpl implements IdeeDao {
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	@Override
@@ -44,8 +39,8 @@ public class IdeeDaoImpl implements IdeeDao {
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	@Override
@@ -56,10 +51,10 @@ public class IdeeDaoImpl implements IdeeDao {
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
-	
+
 	@Override
 	@Transactional
 	public boolean deleteIdee(int idIdee) {
@@ -68,14 +63,19 @@ public class IdeeDaoImpl implements IdeeDao {
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	@Override
-	@Transactional (readOnly = true)
+	@Transactional(readOnly = true)
 	public Idee findIdeeById(int idIdee) {
-		return (Idee) sessionFactory.openSession().get(Idee.class, idIdee);
+		try {
+			return (Idee) sessionFactory.openSession().get(Idee.class, idIdee);
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

@@ -18,14 +18,9 @@ public class CommentaireDaoImpl implements CommentaireDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public CommentaireDaoImpl() {
 		super();
-	}
-
-	public CommentaireDaoImpl(SessionFactory sessionFactory) {
-		super();
-		this.sessionFactory = sessionFactory;
 	}
 
 	@Override
@@ -36,8 +31,8 @@ public class CommentaireDaoImpl implements CommentaireDao {
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	@Override
@@ -48,8 +43,8 @@ public class CommentaireDaoImpl implements CommentaireDao {
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	@Override
@@ -60,8 +55,8 @@ public class CommentaireDaoImpl implements CommentaireDao {
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	@Override
@@ -72,31 +67,36 @@ public class CommentaireDaoImpl implements CommentaireDao {
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	@Override
-	@Transactional (readOnly = true)
+	@Transactional(readOnly = true)
 	public Commentaire findCommentaireById(int idCommentaire) {
-		return (Commentaire) sessionFactory.openSession().get(Commentaire.class, idCommentaire);
+		try {
+			return (Commentaire) sessionFactory.getCurrentSession().get(Commentaire.class, idCommentaire);
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// Cette méthode retourne tous les commentaires
 	// concernant une idée
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional (readOnly = true)
+	@Transactional(readOnly = true)
 	public List<Commentaire> findCommentairesIdee(Idee idee) {
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery(
-					"SELECT c FROM Commentaire c WHERE c.idIdee=:iI");
+			Query query = sessionFactory.getCurrentSession()
+					.createQuery("SELECT c FROM Commentaire c WHERE c.idIdee=:iI");
 			query.setInteger("iI", idee.getIdIdee());
 			return query.list();
 		} catch (HibernateException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 }
