@@ -15,12 +15,10 @@ public interface CommentaireDao {
 
 	// DELETE
 	public boolean deleteCommentaire(Commentaire commentaire);
-
-	public boolean deleteCommentaire(int idCommentaire);
+	public boolean deleteCommentaireById(int idCommentaire);
 
 	// SELECT
 	public Commentaire findCommentaireById(int idCommentaire);
-
 	public List<Commentaire> findCommentairesIdee(Idee idee);
 
 }

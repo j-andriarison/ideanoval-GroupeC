@@ -1,6 +1,5 @@
 package fr.humanbooster.ideanoval.dao.impl;
 
-import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,54 +21,32 @@ public class ClassementBuzzsDaoImpl implements ClassementBuzzsDao {
 	@Transactional(readOnly = true)
 	@Override
 	public ClassementBuzzs getClassementBuzzs() {
-		try {
-			return (ClassementBuzzs) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1")
-					.uniqueResult();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			return null;
-		}
+		return (ClassementBuzzs) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1")
+				.uniqueResult();
 	}
 
 	@Transactional
 	@Override
 	public boolean addClassementBuzzs(ClassementBuzzs classementBuzzs) {
-		try {
-			Integer id = (int) (sessionFactory.getCurrentSession().save(classementBuzzs));
-			if (id > -1) {
-				classementBuzzs.setIdClassementIdee(id);
-				return true;
-			} else {
-				return false;
-			}
-		} catch (HibernateException e) {
-			e.printStackTrace();
+		Integer id = (int) (sessionFactory.getCurrentSession().save(classementBuzzs));
+		if (id > -1) {
+			classementBuzzs.setIdClassementIdee(id);
+			return true;
+		} else {
 			return false;
 		}
 	}
 
 	@Transactional
 	@Override
-	public boolean updateClassementBuzzs(ClassementBuzzs classementBuzzs) {
-		try {
-			sessionFactory.getCurrentSession().update(classementBuzzs);
-			return true;
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			return false;
-		}
+	public void updateClassementBuzzs(ClassementBuzzs classementBuzzs) {
+		sessionFactory.getCurrentSession().update(classementBuzzs);
 	}
 
 	@Transactional
 	@Override
-	public boolean deleteClassementBuzzs(ClassementBuzzs classementBuzzs) {
-		try {
-			sessionFactory.getCurrentSession().delete(classementBuzzs);
-			return true;
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			return false;
-		}
+	public void deleteClassementBuzzs(ClassementBuzzs classementBuzzs) {
+		sessionFactory.openSession().delete(classementBuzzs);
 	}
 
 }

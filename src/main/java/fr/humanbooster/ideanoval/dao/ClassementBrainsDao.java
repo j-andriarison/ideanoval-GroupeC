@@ -11,9 +11,9 @@ public interface ClassementBrainsDao {
 	public boolean addClassementBrains(ClassementBrains classementBrains);
 
 	//	UPDATE
-	public boolean updateClassementBrains(ClassementBrains classementBrains);
+	public void updateClassementBrains(ClassementBrains classementBrains);
 
 	//	DELETE
-	public boolean deleteClassementBrains(ClassementBrains classementBrains);
+	public void deleteClassementBrains(ClassementBrains classementBrains);
 
 }

@@ -71,6 +71,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		return false;
 	}
 
+	
 	@Override
 	@Transactional(readOnly = true)
 	public Utilisateur findUtilisateurById(int idUtilisateur) {
@@ -79,6 +80,9 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
+	@Transactional (readOnly = true)
+	public Utilisateur findUtilisateurByPseudo(String pseudo) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -91,6 +95,9 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		 * query.setInteger("iI", idee.getIdIdee()); return query.list(); }
 		 * catch (HibernateException e) { e.printStackTrace(); }
 		 */
+	@Transactional (readOnly = true)
+	public Utilisateur findUtilisateurByMail(String mail) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -104,6 +111,9 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		 * catch (HibernateException e) { e.printStackTrace(); }
 		 */
 		return null;
+	@Transactional (readOnly = true)
+	public Utilisateur findUtilisateurById(int idUtilisateur) {
+		return (Utilisateur) sessionFactory.openSession().get(Utilisateur.class, idUtilisateur);
 	}
 
 }

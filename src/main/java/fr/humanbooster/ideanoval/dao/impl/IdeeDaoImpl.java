@@ -1,5 +1,7 @@
 package fr.humanbooster.ideanoval.dao.impl;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +59,7 @@ public class IdeeDaoImpl implements IdeeDao {
 
 	@Override
 	@Transactional
-	public boolean deleteIdee(int idIdee) {
+	public boolean deleteIdeeById(int idIdee) {
 		try {
 			sessionFactory.getCurrentSession().delete(findIdeeById(idIdee));
 			return true;
@@ -76,6 +78,13 @@ public class IdeeDaoImpl implements IdeeDao {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Idee> findIdeesByIdUtilisateur(int idUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

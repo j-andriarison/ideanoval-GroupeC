@@ -61,7 +61,7 @@ public class CommentaireDaoImpl implements CommentaireDao {
 
 	@Override
 	@Transactional
-	public boolean deleteCommentaire(int idCommentaire) {
+	public boolean deleteCommentaireById(int idCommentaire) {
 		try {
 			sessionFactory.getCurrentSession().delete(findCommentaireById(idCommentaire));
 			return true;

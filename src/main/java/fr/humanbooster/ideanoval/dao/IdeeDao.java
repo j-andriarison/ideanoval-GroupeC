@@ -1,5 +1,7 @@
 package fr.humanbooster.ideanoval.dao;
 
+import java.util.List;
+
 import fr.humanbooster.ideanoval.business.Idee;
 
 public interface IdeeDao {
@@ -12,10 +14,10 @@ public interface IdeeDao {
 
 	// DELETE
 	public boolean deleteIdee(Idee idee);
-
-	public boolean deleteIdee(int idIdee);
+	public boolean deleteIdeeById(int idIdee);
 
 	// SELECT
 	public Idee findIdeeById(int idIdee);
+	public List<Idee> findIdeesByIdUtilisateur(int idUtilisateur);
 
 }

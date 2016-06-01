@@ -25,5 +25,7 @@ public interface UtilisateurDao {
 	public List<Idee> findIdeesUtilisateur(Utilisateur utilisateur);
 
 	public List<Commentaire> findCommentairesUtilisateur(Utilisateur utilisateur);
+	public Utilisateur findUtilisateurByPseudo(String pseudo);
+	public Utilisateur findUtilisateurByMail(String mail);
 
 }
