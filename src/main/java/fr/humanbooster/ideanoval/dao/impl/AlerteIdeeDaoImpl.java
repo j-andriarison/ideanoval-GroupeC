@@ -53,7 +53,10 @@ public class AlerteIdeeDaoImpl implements AlerteIdeeDao {
 	}
 
 	@SuppressWarnings("unchecked")
+<<<<<<< HEAD
 	@Transactional(readOnly = true)
+=======
+>>>>>>> b4f20bb78226370821fbb4795388edad2dcaa86e
 	@Override
 	public List<AlerteIdee> findAlerteIdeeAll() {
 		return sessionFactory.getCurrentSession().createCriteria(AlerteIdee.class).list();

@@ -19,12 +19,19 @@ public class UtilisateurRoleDaoImpl implements UtilisateurRoleDao {
 	public UtilisateurRoleDaoImpl() {
 		
 	}
-
+	/**
+	 * Constructueur de la classe UtilisateurRoleDaoImpl qui initialise la session Factory
+	 * @param sessionFactory
+	 */
 	public UtilisateurRoleDaoImpl(SessionFactory sessionFactory) {
 		super();
 		this.sessionFactory = sessionFactory;
 	}
-
+	/**
+	 * La méthode addUtilisateurRole() permet d'ajouter un rôle de l'utilisateur passé en paramètre
+	 * @param Objet UtilisateurRole
+	 * @return true si l'UtilisateurRole est ajouté dans la table en succès
+	 */
 	@Override
 	@Transactional
 	public boolean addUtilisateurRole(UtilisateurRole utilisateurRole) {
@@ -36,12 +43,36 @@ public class UtilisateurRoleDaoImpl implements UtilisateurRoleDao {
 			return false;
 		}
 	}
-
+	/**
+	 * La méthode updateUtilisateurRole() permet de mettre à jour un rôle de l'utilisateur passé en paramètre
+	 * @param Objet UtilisateurRole
+	 * @return true si la mise à jour est en succès
+	 */
 	@Override
 	@Transactional
-	@SuppressWarnings("unchecked")
-	public List<UtilisateurRole> findAll() {
-
-		return sessionFactory.getCurrentSession().createQuery("from UtilisateurRole").list();
+	public boolean updateUtilisateurRole(UtilisateurRole utilisateurRole) {
+		sessionFactory.getCurrentSession().update(utilisateurRole);
+		return true;
 	}
+/**
+ * La méthode deleteUtilisateurRole() permet de supprimer un rôle de l'utilisateur passé en paramètre
+ * @param Objet utilisateurRole
+ * @return true si la suppression est en succès
+ */
+	@Override
+	@Transactional
+	public boolean deleteUtilisateurRole(UtilisateurRole utilisateurRole) {
+		sessionFactory.openSession().delete(utilisateurRole);
+		return true;
+	}
+	/**
+	 * Cette méthode permet de récuperer la liste de rôle des utilisateurs
+	 * @return List<UtilisateurRole>
+	 */
+	@Override
+	@Transactional(readOnly=true)
+	@SuppressWarnings("unchecked")
+	public List<UtilisateurRole> getAllRole() {
+		return sessionFactory.getCurrentSession().createQuery("from UtilisateurRole").list();
+			}
 }
