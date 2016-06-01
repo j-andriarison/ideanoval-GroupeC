@@ -1,5 +1,6 @@
 package fr.humanbooster.ideanoval.dao.impl;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,32 +22,54 @@ public class ClassementTopsDaoImpl implements ClassementTopsDao {
 	@Transactional(readOnly = true)
 	@Override
 	public ClassementTops getClassementTops() {
-		return (ClassementTops) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1")
-				.uniqueResult();
+		try {
+			return (ClassementTops) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1")
+					.uniqueResult();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Transactional
 	@Override
 	public boolean addClassementTops(ClassementTops classementTops) {
-		Integer id = (int) (sessionFactory.getCurrentSession().save(classementTops));
-		if (id > -1) {
-			classementTops.setIdClassementIdee(id);
-			return true;
-		} else {
+		try {
+			Integer id = (int) (sessionFactory.getCurrentSession().save(classementTops));
+			if (id > -1) {
+				classementTops.setIdClassementIdee(id);
+				return true;
+			} else {
+				return false;
+			}
+		} catch (HibernateException e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
 
 	@Transactional
 	@Override
-	public void updateClassementTops(ClassementTops classementTops) {
-		sessionFactory.getCurrentSession().update(classementTops);
+	public boolean updateClassementTops(ClassementTops classementTops) {
+		try {
+			sessionFactory.getCurrentSession().update(classementTops);
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Transactional
 	@Override
-	public void deleteClassementTops(ClassementTops classementTops) {
-		sessionFactory.openSession().delete(classementTops);
+	public boolean deleteClassementTops(ClassementTops classementTops) {
+		try {
+			sessionFactory.getCurrentSession().delete(classementTops);
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

@@ -11,9 +11,9 @@ public interface ClassementBuzzsDao {
 	public boolean addClassementBuzzs(ClassementBuzzs classementBuzzs);
 
 	// UPDATE
-	public void updateClassementBuzzs(ClassementBuzzs classementBuzzs);
+	public boolean updateClassementBuzzs(ClassementBuzzs classementBuzzs);
 
 	// DELETE
-	public void deleteClassementBuzzs(ClassementBuzzs classementBuzzs);
+	public boolean deleteClassementBuzzs(ClassementBuzzs classementBuzzs);
 
 }

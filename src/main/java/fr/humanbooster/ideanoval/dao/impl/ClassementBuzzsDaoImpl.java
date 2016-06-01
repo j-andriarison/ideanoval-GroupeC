@@ -1,5 +1,6 @@
 package fr.humanbooster.ideanoval.dao.impl;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,32 +22,54 @@ public class ClassementBuzzsDaoImpl implements ClassementBuzzsDao {
 	@Transactional(readOnly = true)
 	@Override
 	public ClassementBuzzs getClassementBuzzs() {
-		return (ClassementBuzzs) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1")
-				.uniqueResult();
+		try {
+			return (ClassementBuzzs) sessionFactory.getCurrentSession().createQuery("from ChoixPossible LIMIT 1")
+					.uniqueResult();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Transactional
 	@Override
 	public boolean addClassementBuzzs(ClassementBuzzs classementBuzzs) {
-		Integer id = (int) (sessionFactory.getCurrentSession().save(classementBuzzs));
-		if (id > -1) {
-			classementBuzzs.setIdClassementIdee(id);
-			return true;
-		} else {
+		try {
+			Integer id = (int) (sessionFactory.getCurrentSession().save(classementBuzzs));
+			if (id > -1) {
+				classementBuzzs.setIdClassementIdee(id);
+				return true;
+			} else {
+				return false;
+			}
+		} catch (HibernateException e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
 
 	@Transactional
 	@Override
-	public void updateClassementBuzzs(ClassementBuzzs classementBuzzs) {
-		sessionFactory.getCurrentSession().update(classementBuzzs);
+	public boolean updateClassementBuzzs(ClassementBuzzs classementBuzzs) {
+		try {
+			sessionFactory.getCurrentSession().update(classementBuzzs);
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Transactional
 	@Override
-	public void deleteClassementBuzzs(ClassementBuzzs classementBuzzs) {
-		sessionFactory.openSession().delete(classementBuzzs);
+	public boolean deleteClassementBuzzs(ClassementBuzzs classementBuzzs) {
+		try {
+			sessionFactory.getCurrentSession().delete(classementBuzzs);
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

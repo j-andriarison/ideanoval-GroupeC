@@ -11,9 +11,9 @@ public interface ClassementTopsDao {
 	public boolean addClassementTops(ClassementTops classementTops);
 
 	// UPDATE
-	public void updateClassementTops(ClassementTops classementTops);
+	public boolean updateClassementTops(ClassementTops classementTops);
 
 	// DELETE
-	public void deleteClassementTops(ClassementTops classementTops);
+	public boolean deleteClassementTops(ClassementTops classementTops);
 
 }
