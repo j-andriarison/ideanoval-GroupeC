@@ -7,12 +7,15 @@ import fr.humanbooster.ideanoval.business.Idee;
 import fr.humanbooster.ideanoval.business.Vote;
 
 public interface VoteDao {
-	//INSERT
+	// CREATE
 	public boolean addVote(Vote vote);
-	//DELETE
+
+	// DELETE
 	public boolean deleteVote(Vote vote);
+
 	public boolean deleteVote(int idVote);
-	//SELECT
+
+	// SELECT
 	public List<Vote> getAllVoteByIdee(Idee idee);
 	// public List<Vote> getAllVoteByUser(Utilisateur utilisateur);
 }

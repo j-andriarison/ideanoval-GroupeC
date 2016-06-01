@@ -1,5 +1,6 @@
 package fr.humanbooster.ideanoval.dao.impl;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,25 +16,42 @@ public class LigneClassementIdeeDaoImpl implements LigneClassementIdeeDao {
 	@Transactional
 	@Override
 	public boolean addLigneClassementIdee(LigneClassementIdee ligneClassementIdee) {
-		Integer id = (int) (sessionFactory.getCurrentSession().save(ligneClassementIdee));
-		if (id > -1) {
-			ligneClassementIdee.setIdLigneClassementIdee(id);
-			return true;
-		} else {
+		try {
+			Integer id = (int) (sessionFactory.getCurrentSession().save(ligneClassementIdee));
+			if (id > -1) {
+				ligneClassementIdee.setIdLigneClassementIdee(id);
+				return true;
+			} else {
+				return false;
+			}
+		} catch (HibernateException e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
 
 	@Transactional
 	@Override
-	public void updateLigneClassementIdee(LigneClassementIdee ligneClassementIdee) {
-		sessionFactory.getCurrentSession().update(ligneClassementIdee);
+	public boolean updateLigneClassementIdee(LigneClassementIdee ligneClassementIdee) {
+		try {
+			sessionFactory.getCurrentSession().update(ligneClassementIdee);
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Transactional
 	@Override
-	public void deleteLigneClassementIdee(LigneClassementIdee ligneClassementIdee) {
-		sessionFactory.openSession().delete(ligneClassementIdee);
+	public boolean deleteLigneClassementIdee(LigneClassementIdee ligneClassementIdee) {
+		try {
+			sessionFactory.getCurrentSession().delete(ligneClassementIdee);
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

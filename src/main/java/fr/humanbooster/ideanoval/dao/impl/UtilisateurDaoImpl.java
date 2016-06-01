@@ -3,7 +3,6 @@ package fr.humanbooster.ideanoval.dao.impl;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,14 +18,9 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public UtilisateurDaoImpl() {
 		super();
-	}
-
-	public UtilisateurDaoImpl(SessionFactory sessionFactory) {
-		super();
-		this.sessionFactory = sessionFactory;
 	}
 
 	@Override
@@ -78,38 +72,38 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	}
 
 	@Override
-	@Transactional (readOnly = true)
+	@Transactional(readOnly = true)
 	public Utilisateur findUtilisateurById(int idUtilisateur) {
-		return (Utilisateur) sessionFactory.openSession().get(Utilisateur.class, idUtilisateur);
+		try {
+			return (Utilisateur) sessionFactory.getCurrentSession().get(Utilisateur.class, idUtilisateur);
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	
 	@Override
-	@Transactional (readOnly = true)
+	@Transactional(readOnly = true)
 	public List<Idee> findIdeesUtilisateur(Utilisateur utilisateur) {
-		/*try {
-			Query query = sessionFactory.getCurrentSession().createQuery(
-					"SELECT c FROM Commentaire c WHERE c.idIdee=:iI");
-			query.setInteger("iI", idee.getIdIdee());
-			return query.list();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}*/
+		/*
+		 * try { Query query = sessionFactory.getCurrentSession().createQuery(
+		 * "SELECT c FROM Commentaire c WHERE c.idIdee=:iI");
+		 * query.setInteger("iI", idee.getIdIdee()); return query.list(); }
+		 * catch (HibernateException e) { e.printStackTrace(); }
+		 */
 		return null;
 	}
 
 	@Override
-	@Transactional (readOnly = true)
+	@Transactional(readOnly = true)
 	public List<Commentaire> findCommentairesUtilisateur(Utilisateur utilisateur) {
-		/*try {
-			Query query = sessionFactory.getCurrentSession().createQuery(
-					"SELECT c FROM Commentaire c WHERE c.idIdee=:iI");
-			query.setInteger("iI", idee.getIdIdee());
-			return query.list();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}*/
+		/*
+		 * try { Query query = sessionFactory.getCurrentSession().createQuery(
+		 * "SELECT c FROM Commentaire c WHERE c.idIdee=:iI");
+		 * query.setInteger("iI", idee.getIdIdee()); return query.list(); }
+		 * catch (HibernateException e) { e.printStackTrace(); }
+		 */
 		return null;
 	}
-	 
+
 }

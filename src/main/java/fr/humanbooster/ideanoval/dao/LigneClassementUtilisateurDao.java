@@ -4,8 +4,13 @@ import fr.humanbooster.ideanoval.business.LigneClassementUtilisateur;
 
 public interface LigneClassementUtilisateurDao {
 
+	// CREATE
 	public boolean addLigneClassementUtilisateur(LigneClassementUtilisateur ligneClassementUtilisateur);
-	public void updateLigneClassementUtilisateur(LigneClassementUtilisateur ligneClassementUtilisateur);
-	public void deleteLigneClassementUtilisateur(LigneClassementUtilisateur ligneClassementUtilisateur);
-	
+
+	// UPDATE
+	public boolean updateLigneClassementUtilisateur(LigneClassementUtilisateur ligneClassementUtilisateur);
+
+	// DELETE
+	public boolean deleteLigneClassementUtilisateur(LigneClassementUtilisateur ligneClassementUtilisateur);
+
 }
