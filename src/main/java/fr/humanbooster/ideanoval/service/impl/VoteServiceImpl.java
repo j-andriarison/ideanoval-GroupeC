@@ -4,47 +4,76 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import fr.humanbooster.ideanoval.business.Idee;
 import fr.humanbooster.ideanoval.business.Vote;
 import fr.humanbooster.ideanoval.dao.VoteDao;
 import fr.humanbooster.ideanoval.service.VoteService;
 
+/**
+ * 
+ * Cette classe permet d'exploiter l'interface VoteService
+ * 
+ * @author Jean ANDRIANARISON
+ *
+ */
 @Service
 public class VoteServiceImpl implements VoteService {
-
 	@Autowired
 	private VoteDao voteDao;
-	
+
 	/**
-	 * paramËtre : un Vote
-	 * retourne : true si le vote a ÈtÈ crÈÈ
+	 * La createVote() permet d'enregister une Vote pass√© en param√®tre. Elle
+	 * fait appel au service addVote dans le VoteDao.
+	 * 
+	 * @param Objet
+	 *            Vote
+	 * @return true si l'enregistrement est en succ√®s
 	 */
 	@Override
-	@Transactional
 	public boolean createVote(Vote vote) {
 		return voteDao.addVote(vote);
 	}
 
 	/**
-	 * paramËtre : un Vote
-	 * retourne : true si le vote a ÈtÈ supprimÈ
+	 * La deleteVote() permet de supprimer une Vote pass√© en param√®tre. Elle
+	 * fait appel au service deleteVote(Vote vote) dans le VoteDao.
+	 * 
+	 * @param Objet
+	 *            Vote
+	 * @return true si la suppression est en succ√®s
 	 */
 	@Override
-	@Transactional
 	public boolean deleteVote(Vote vote) {
+
 		return voteDao.deleteVote(vote);
 	}
 
 	/**
-	 * paramËtre : une Idee
-	 * retourne : la liste des votes concernant cette idÈe
+	 * La createVote() permet d'enregister une Vote pass√© en param√®tre. Elle
+	 * fait appel au service deleteVote(int idVote) dans le VoteDao.
+	 * 
+	 * @param Int
+	 *            idVote
+	 * @return true si la suppression est en succ√®s
 	 */
 	@Override
-	@Transactional
-	public List<Vote> getVotesIdee(Idee idee) {
-		return voteDao.getAllVoteByIdee(idee);
+	public boolean deleteVote(int idVote) {
+		return voteDao.deleteVote(idVote);
 	}
 
+	/**
+	 * La getAllVoteByIdee() permet de lister Vote pass√© en param√®tre. Elle fait
+	 * appel au service getAllVoteByIdee() dans le VoteDao.
+	 * 
+	 * @param Objet
+	 *            Idee
+	 * @return List<Vote>
+	 */
+	@Override
+	public List<Vote> getAllVoteByIdee(Idee idee) {
+		List<Vote> votes = (List<Vote>) voteDao.getAllVoteByIdee(idee);
+		return votes;
+
+	}
 }
