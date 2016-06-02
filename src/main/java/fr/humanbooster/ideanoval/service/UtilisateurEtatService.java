@@ -1,6 +1,7 @@
 package fr.humanbooster.ideanoval.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.humanbooster.ideanoval.business.UtilisateurEtat;
 import fr.humanbooster.ideanoval.dao.impl.UtilisateurEtatDaoImpl;
@@ -11,6 +12,7 @@ import fr.humanbooster.ideanoval.dao.impl.UtilisateurEtatDaoImpl;
  * @author Frederic Moussiegt
  *
  */
+@Service
 public class UtilisateurEtatService {
 	// NON_VERIFIE, ACTIVE, DESACTIVE, SUPPRIME
 
