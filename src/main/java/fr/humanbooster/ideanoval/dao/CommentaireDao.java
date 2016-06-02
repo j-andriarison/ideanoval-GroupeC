@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.humanbooster.ideanoval.business.Commentaire;
 import fr.humanbooster.ideanoval.business.Idee;
+import fr.humanbooster.ideanoval.business.Utilisateur;
 
 public interface CommentaireDao {
 
@@ -20,5 +21,6 @@ public interface CommentaireDao {
 	// SELECT
 	public Commentaire findCommentaireById(int idCommentaire);
 	public List<Commentaire> findCommentairesIdee(Idee idee);
+	public List<Commentaire> findCommentairesUtilisateur(Utilisateur utilisateur);
 
 }
