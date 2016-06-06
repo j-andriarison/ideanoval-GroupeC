@@ -19,7 +19,6 @@ public class CommentaireServiceImpl implements CommentaireService {
 	 * retourne : true si le commentaire a été ajouté
 	 */
 	@Override
-	@Transactional
 	public boolean createCommentaire(Commentaire commentaire) {
 		return commentaireDao.addCommentaire(commentaire);
 	}
@@ -30,7 +29,6 @@ public class CommentaireServiceImpl implements CommentaireService {
 	 * retourne true si le commentaire a été mis à jour
 	 */
 	@Override
-	@Transactional
 	public boolean updateCommentaireEtat(Commentaire commentaire, boolean etat) {
 		commentaire.setEstDesactive(etat);
 		return commentaireDao.updateCommentaire(commentaire);

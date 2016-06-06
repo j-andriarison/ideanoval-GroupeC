@@ -19,7 +19,6 @@ public class IdeeServiceImpl implements IdeeService {
 	 * retourne : true si l'idée a été créée
 	 */
 	@Override
-	@Transactional
 	public boolean createIdee(Idee idee) {
 		return ideeDao.addIdee(idee);
 	}
@@ -29,7 +28,6 @@ public class IdeeServiceImpl implements IdeeService {
 	 * retourne : true si l'état de l'idée a été mis à jour
 	 */
 	@Override
-	@Transactional
 	public boolean updateIdeeEtat(Idee idee, boolean etat) {
 		idee.setEstDesactivee(etat);
 		return ideeDao.updateIdee(idee);

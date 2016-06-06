@@ -31,7 +31,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	 * false si le pseudo et/ou le mail sont déjà utilisés
 	 */
 	@Override
-	@Transactional
 	public boolean createUtilisateur(Utilisateur utilisateur) {
 		boolean mailOk = true;
 		boolean pseudoOk = true;
@@ -55,7 +54,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	 * la mise à jour a été faite
 	 */
 	@Override
-	@Transactional
 	public boolean updateUtilisateurEtat(Utilisateur utilisateur, UtilisateurEtat utilisateurEtat) {
 		utilisateur.setEtatUtilisateur(utilisateurEtat);
 		return utilisateurDao.updateUtilisateur(utilisateur);
@@ -67,7 +65,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	 * est créé
 	 */
 	@Override
-	@Transactional
 	public boolean deleteUtilisateur(Utilisateur utilisateur) {
 		return utilisateurDao.deleteUtilisateur(utilisateur);
 	}
@@ -77,7 +74,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	 * retourne : l'utilisateur du pseudo
 	 */
 	@Override
-	@Transactional
 	public Utilisateur getUtilisateurByPseudo(String pseudo) {
 		return utilisateurDao.findUtilisateurByPseudo(pseudo);
 	}
@@ -87,7 +83,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	 * retourne : l'utilisateur du mail
 	 */
 	@Override
-	@Transactional
 	public Utilisateur getUtilisateurByMail(String mail) {
 		return utilisateurDao.findUtilisateurByMail(mail);
 	}
@@ -97,7 +92,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	 * retourne : la liste des idées postées par cet utilisateur
 	 */
 	@Override
-	@Transactional
 	public List<Idee> getIdeesUtilisateur(Utilisateur utilisateur) {	
 		return ideeDao.findIdeesByIdUtilisateur(utilisateur.getIdUtilisateur());
 	}
@@ -107,7 +101,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	 * retourne : la liste des commentaires postés par cet utilisateur
 	 */
 	@Override
-	@Transactional
 	public List<Commentaire> getCommentairesUtilisateur(Utilisateur utilisateur) {
 		return commentaireDao.findCommentairesUtilisateur(utilisateur);
 	}
