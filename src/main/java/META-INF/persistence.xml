@@ -6,15 +6,17 @@
 		<class>fr.humanbooster.ideanoval.business.AlerteIdee</class>
 		<class>fr.humanbooster.ideanoval.business.ClassementBrains</class>
 		<class>fr.humanbooster.ideanoval.business.ClassementBuzzs</class>
+		<class>fr.humanbooster.ideanoval.business.ClassementIdee</class>
 		<class>fr.humanbooster.ideanoval.business.ClassementTops</class>
 		<class>fr.humanbooster.ideanoval.business.Commentaire</class>
 		<class>fr.humanbooster.ideanoval.business.Idee</class>
 		<class>fr.humanbooster.ideanoval.business.IdeeCategorie</class>
+		<class>fr.humanbooster.ideanoval.business.LigneClassementIdee</class>
+		<class>fr.humanbooster.ideanoval.business.LigneClassementUtilisateur</class>
 		<class>fr.humanbooster.ideanoval.business.Utilisateur</class>
 		<class>fr.humanbooster.ideanoval.business.UtilisateurEtat</class>
 		<class>fr.humanbooster.ideanoval.business.UtilisateurRole</class>
 		<class>fr.humanbooster.ideanoval.business.Vote</class>
-		<class>fr.humanbooster.ideanoval.business.LigneClassementIdee</class>
-		<class>fr.humanbooster.ideanoval.business.LigneClassementUtilisateur</class>
+		<class>fr.humanbooster.ideanoval.dao.PersistentLogin</class>
 	</persistence-unit>
 </persistence>
