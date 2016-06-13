@@ -17,3 +17,6 @@ local.properties
 *.launch
 
 .classpath
+*.project
+.project
+*.classpath
