@@ -12,7 +12,7 @@ import fr.humanbooster.ideanoval.dao.UtilisateurEtatDao;
 
 @Repository
 public class UtilisateurEtatDaoImpl implements UtilisateurEtatDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -20,16 +20,11 @@ public class UtilisateurEtatDaoImpl implements UtilisateurEtatDao {
 		super();
 	}
 
-	public UtilisateurEtatDaoImpl(SessionFactory sessionFactory) {
-		super();
-		this.sessionFactory = sessionFactory;
-	}
-
 	@Transactional
 	@Override
 	public boolean addUtilisateurEtat(UtilisateurEtat utilisateurEtat) {
 		Integer id = (int) (sessionFactory.getCurrentSession().save(utilisateurEtat));
-		if( id > -1 ) {
+		if (id > -1) {
 			utilisateurEtat.setIdEtatUtilisateur(id);
 			return true;
 		} else {
@@ -47,11 +42,11 @@ public class UtilisateurEtatDaoImpl implements UtilisateurEtatDao {
 	@Transactional
 	@Override
 	public boolean deleteUtilisateurEtat(UtilisateurEtat utilisateurEtat) {
-		sessionFactory.openSession().delete(utilisateurEtat);
+		sessionFactory.getCurrentSession().delete(utilisateurEtat);
 		return true;
 	}
 
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<UtilisateurEtat> getAllEtats() {
