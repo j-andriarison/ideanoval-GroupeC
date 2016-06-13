@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,38 +29,41 @@ import javax.persistence.TemporalType;
 public class Utilisateur implements Serializable {
 
 	private static final long serialVersionUID = 1683870407253730127L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idUtilisateur;
-	
+
 	@OneToMany
 	private List<Idee> idees;
-	
+
 	@OneToMany
 	private List<Alerte> alertes;
-	
+
 	@ManyToOne
 	private ClassementBrains classementBrain;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dateInscription", nullable = false, length = 19)
 	private Date dateInscription;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "dateSuppression", length = 19)	
+	@Column(name = "dateSuppression", length = 19)
 	private Date dateSuppression;
-	
+
 	@Column(name = "email", nullable = false, length = 50)
 	private String email;
-	
-	@ManyToOne
-	private UtilisateurEtat etatUtilisateur;
-	
+
+	// @ManyToOne
+	// private UtilisateurEtat etatUtilisateur;
+
+	@Enumerated(EnumType.ORDINAL)
+	private EtatUtilisateur etatUtilisateur;
+
 	@Column(name = "motDePasse", nullable = false, length = 20)
 	private String motDePasse;
 
-	 @Column(name = "pseudo", nullable = false, length = 30)
+	@Column(name = "pseudo", nullable = false, length = 30)
 	private String pseudo;
 
 	@ManyToOne
@@ -68,7 +73,7 @@ public class Utilisateur implements Serializable {
 	}
 
 	public Utilisateur(int idUtilisateur, String email, String motDePasse, String pseudo, Date dateInscription,
-			Date dateSuppression, UtilisateurRole roleUtilisateur, UtilisateurEtat etatUtilisateur) {
+			Date dateSuppression, UtilisateurRole roleUtilisateur, EtatUtilisateur etatUtilisateur) {
 		super();
 		this.idUtilisateur = idUtilisateur;
 		this.email = email;
@@ -100,7 +105,7 @@ public class Utilisateur implements Serializable {
 		return email;
 	}
 
-	public UtilisateurEtat getEtatUtilisateur() {
+	public EtatUtilisateur getEtatUtilisateur() {
 		return etatUtilisateur;
 	}
 
@@ -140,7 +145,7 @@ public class Utilisateur implements Serializable {
 		this.email = email;
 	}
 
-	public void setEtatUtilisateur(UtilisateurEtat etatUtilisateur) {
+	public void setEtatUtilisateur(EtatUtilisateur etatUtilisateur) {
 		this.etatUtilisateur = etatUtilisateur;
 	}
 
@@ -166,6 +171,5 @@ public class Utilisateur implements Serializable {
 				+ ", pseudo=" + pseudo + ", dateInscription=" + dateInscription + ", dateSuppression=" + dateSuppression
 				+ ", roleUtilisateur=" + roleUtilisateur + ", etatUtilisateur=" + etatUtilisateur + "]";
 	}
-
 
 }

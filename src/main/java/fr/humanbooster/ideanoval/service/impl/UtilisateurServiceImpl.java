@@ -4,12 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import fr.humanbooster.ideanoval.business.Commentaire;
+import fr.humanbooster.ideanoval.business.EtatUtilisateur;
 import fr.humanbooster.ideanoval.business.Idee;
 import fr.humanbooster.ideanoval.business.Utilisateur;
-import fr.humanbooster.ideanoval.business.UtilisateurEtat;
 import fr.humanbooster.ideanoval.dao.CommentaireDao;
 import fr.humanbooster.ideanoval.dao.IdeeDao;
 import fr.humanbooster.ideanoval.dao.UtilisateurDao;
@@ -54,8 +53,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	 * la mise à jour a été faite
 	 */
 	@Override
-	public boolean updateUtilisateurEtat(Utilisateur utilisateur, UtilisateurEtat utilisateurEtat) {
-		utilisateur.setEtatUtilisateur(utilisateurEtat);
+	public boolean updateEtatUtilisateur(Utilisateur utilisateur, EtatUtilisateur etatUtilisateur) {
+		utilisateur.setEtatUtilisateur(etatUtilisateur);
 		return utilisateurDao.updateUtilisateur(utilisateur);
 	}
 

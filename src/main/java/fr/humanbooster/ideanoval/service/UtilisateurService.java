@@ -10,7 +10,7 @@ import fr.humanbooster.ideanoval.business.Utilisateur;
 public interface UtilisateurService {
 	
 	public boolean createUtilisateur(Utilisateur utilisateur);
-	public boolean updateUtilisateurEtat(Utilisateur utilisateur,EtatUtilisateur etatUtilisateur);
+	public boolean updateEtatUtilisateur(Utilisateur utilisateur,EtatUtilisateur etatUtilisateur);
 	public boolean deleteUtilisateur(Utilisateur utilisateur);
 	public Utilisateur getUtilisateurByPseudo(String pseudo);
 	public Utilisateur getUtilisateurByMail(String mail);
