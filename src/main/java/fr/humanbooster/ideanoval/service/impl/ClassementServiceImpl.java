@@ -12,11 +12,21 @@ import fr.humanbooster.ideanoval.business.ClassementBuzzs;
 import fr.humanbooster.ideanoval.business.ClassementTops;
 import fr.humanbooster.ideanoval.business.LigneClassementIdee;
 import fr.humanbooster.ideanoval.business.LigneClassementUtilisateur;
+import fr.humanbooster.ideanoval.business.Utilisateur;
 import fr.humanbooster.ideanoval.dao.ClassementBrainsDao;
 import fr.humanbooster.ideanoval.dao.ClassementBuzzsDao;
 import fr.humanbooster.ideanoval.dao.ClassementTopsDao;
+import fr.humanbooster.ideanoval.dao.LigneClassementIdeeDao;
+import fr.humanbooster.ideanoval.dao.LigneClassementUtilisateurDao;
 import fr.humanbooster.ideanoval.service.ClassementService;
+import fr.humanbooster.ideanoval.service.UtilisateurService;
 
+/**
+ * Service permettant de gérer les classements.
+ * 13 juin 2016 18:34:35
+ * 
+ * @author Frederic Moussiegt
+ */
 public class ClassementServiceImpl implements ClassementService {
 
 	@Autowired
@@ -28,6 +38,18 @@ public class ClassementServiceImpl implements ClassementService {
 	@Autowired
 	private ClassementBrainsDao classementBrainsDao;
 
+	@Autowired
+	private UtilisateurService utilisateurService;
+	
+	@Autowired
+	private LigneClassementUtilisateurDao ligneClassementUtilisateurDao;
+
+	// Constructeurs
+	public ClassementServiceImpl() {
+		super();
+	}
+
+	// Getters/setters
 	@Override
 	public ClassementTops getClassementTops() {
 		return classementTopsDao.getClassementTops();
@@ -43,14 +65,25 @@ public class ClassementServiceImpl implements ClassementService {
 		return classementBrainsDao.getClassementBrains();
 	}
 
+	// Méthodes
+
+	/**
+	 * Méthode permettant de mettre à jour les classements. Elle est appelée toutes les 24h.
+	 */
 	@Override
 	public void refreshClassements() {
 		// créer classement Tops
+		createClassementTops();
 		// remplacer classement Tops
+
 		// créer classement Buzzs
+		createClassementBuzzs();
 		// remplacer classement Buzzs
+
 		// créer classement Brains
+		createClassementBrains();
 		// remplacer classement Brains
+
 	}
 
 	private void createClassementTops() {
@@ -86,12 +119,32 @@ public class ClassementServiceImpl implements ClassementService {
 
 	}
 
-	private void createClassementBrains() {
-		List<LigneClassementUtilisateur> lignesClassementUtilisateur = new ArrayList<>(10);
+	void createClassementBrains() {
 		// Récupérer les 10 utilisateurs les plus prolifiques
+		// Gestion des égalités?
+		List<Utilisateur> brains = utilisateurService.getBrains();
+		List<LigneClassementUtilisateur> lignes = new ArrayList<>();
 
-		ClassementBrains classement = new ClassementBrains(Date.from(Instant.now()), lignesClassementUtilisateur);
-
+		// Récupérer l'ancien classement et les anciennes lignes de classement
+		ClassementBrains classementPrecedent = classementBrainsDao.getClassementBrains();
+		List<LigneClassementUtilisateur> lignesPrecedentes = ligneClassementUtilisateurDao.getAllLignesClassementUtilisateur();
+		
+		//	Créer le nouveau classement
+		ClassementBrains classement = new ClassementBrains(Date.from(Instant.now()), lignes);
+		
+		// Créer les lignes de classement
+		for (int i = 0; i < brains.size(); i++) {
+			lignes.add(new LigneClassementUtilisateur(i, classement, brains.get(i)));
+		}
+		
+		//	Sauvegarder le nouveau classement
+		//	TODO: faut-il créer les lignes à part ou sont-elles créées directement?
+		classementBrainsDao.updateClassementBrains(classement);
+		
+		//	Supprimer l'ancien classement
+		classementBrainsDao.deleteClassementBrains(classementPrecedent);
+		
+		//	TODO: reste-t-il les lignes de classements?
 	}
 
 }

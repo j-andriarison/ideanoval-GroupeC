@@ -16,5 +16,5 @@ public interface UtilisateurService {
 	public Utilisateur getUtilisateurByMail(String mail);
 	public List<Idee> getIdeesUtilisateur(Utilisateur utilisateur);
 	public List<Commentaire> getCommentairesUtilisateur(Utilisateur utilisateur);
-	
+	public List<Utilisateur> getBrains();
 }

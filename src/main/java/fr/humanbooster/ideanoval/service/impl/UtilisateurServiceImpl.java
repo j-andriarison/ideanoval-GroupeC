@@ -45,7 +45,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		} else {
 			return false;
 		}
-
 	}
 
 	/**
@@ -102,6 +101,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	@Override
 	public List<Commentaire> getCommentairesUtilisateur(Utilisateur utilisateur) {
 		return commentaireDao.findCommentairesUtilisateur(utilisateur);
+	}
+
+	@Override
+	public List<Utilisateur> getBrains() {
+		return utilisateurDao.getBrains();
 	}
 
 }

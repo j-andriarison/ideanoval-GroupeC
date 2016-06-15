@@ -18,6 +18,7 @@ public class ClassementBrainsDaoImpl implements ClassementBrainsDao {
 		super();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Transactional(readOnly = true)
 	@Override
 	public ClassementBrains getClassementBrains() {

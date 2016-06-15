@@ -1,5 +1,8 @@
 package fr.humanbooster.ideanoval.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -10,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.humanbooster.ideanoval.business.Utilisateur;
 import fr.humanbooster.ideanoval.dao.UtilisateurDao;
 
+@SuppressWarnings("deprecation")
 @Repository
 public class UtilisateurDaoImpl implements UtilisateurDao {
 
@@ -82,7 +86,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	@Transactional(readOnly = true)
 	public Utilisateur findUtilisateurByPseudo(String pseudo) {
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("FROM Utilisateur u WHERE u.pseudo=:Up");
+			@SuppressWarnings("unchecked")
+			Query<Utilisateur> query = sessionFactory.getCurrentSession().createQuery("FROM Utilisateur u WHERE u.pseudo=:Up");
 			query.setString("Up", pseudo);
 			Utilisateur utilisateur = (Utilisateur) query.uniqueResult();
 			return utilisateur;
@@ -92,10 +97,11 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		}	
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public Utilisateur findUtilisateurByMail(String mail) {
 		try {
-			Query query = sessionFactory.getCurrentSession().createQuery("FROM Utilisateur u WHERE u.mail=:Um");
+			Query<Utilisateur> query = sessionFactory.getCurrentSession().createQuery("FROM Utilisateur u WHERE u.mail=:Um");
 			query.setString("Um", mail);
 			Utilisateur utilisateur = (Utilisateur) query.uniqueResult();
 			return utilisateur;
@@ -103,6 +109,22 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 			e.printStackTrace();
 			return null;
 		}	
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	@Override
+	public List<Utilisateur> getBrains() {
+		List<Utilisateur> result = new ArrayList<>(10);
+		try {
+			Query<Utilisateur> query = sessionFactory.getCurrentSession().createQuery("SELECT u FROM Utilisateur u, Idee i GROUP BY i.idUtilisateur ORDER BY count(i.idUtilisateur) DESC");
+			query.setMaxResults(10);
+			result = query.list();
+			return result;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

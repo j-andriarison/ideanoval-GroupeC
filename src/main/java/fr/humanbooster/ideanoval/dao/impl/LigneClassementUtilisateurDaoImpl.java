@@ -1,5 +1,7 @@
 package fr.humanbooster.ideanoval.dao.impl;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +48,18 @@ public class LigneClassementUtilisateurDaoImpl implements LigneClassementUtilisa
 	@Override
 	public boolean deleteLigneClassementUtilisateur(LigneClassementUtilisateur ligneClassementUtilisateur) {
 		try {
-			sessionFactory.openSession().delete(ligneClassementUtilisateur);
+			sessionFactory.getCurrentSession().delete(ligneClassementUtilisateur);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@SuppressWarnings({ "deprecation", "unchecked" })
+	@Transactional
+	@Override
+	public List<LigneClassementUtilisateur> getAllLignesClassementUtilisateur() {
+		return sessionFactory.getCurrentSession().createCriteria(LigneClassementUtilisateur.class).list();
 	}
 }
