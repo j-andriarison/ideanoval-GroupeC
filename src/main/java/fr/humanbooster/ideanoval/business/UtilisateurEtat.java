@@ -25,10 +25,10 @@ public class UtilisateurEtat implements Serializable {
 
 	@Column(name = "etatUtilisateur", nullable = false, length = 30)
 	private String etatUtilisateur;
-
+/*
 	@OneToMany(mappedBy = "etatUtilisateur")
 	List<Utilisateur> utilisateurs;
-
+*/
 	public UtilisateurEtat() {
 
 	}
@@ -54,7 +54,7 @@ public class UtilisateurEtat implements Serializable {
 	public void setIdEtatUtilisateur(int idEtatUtilisateur) {
 		this.idEtatUtilisateur = idEtatUtilisateur;
 	}
-
+/*
 	public List<Utilisateur> getUtilisateurs() {
 		return utilisateurs;
 	}
@@ -62,7 +62,7 @@ public class UtilisateurEtat implements Serializable {
 	public void setUtilisateurs(List<Utilisateur> utilisateurs) {
 		this.utilisateurs = utilisateurs;
 	}
-
+*/
 	@Override
 	public String toString() {
 		return "EtatUtilisateur [idEtatUtilisateur=" + idEtatUtilisateur + ", etatUtilisateur=" + etatUtilisateur + "]";

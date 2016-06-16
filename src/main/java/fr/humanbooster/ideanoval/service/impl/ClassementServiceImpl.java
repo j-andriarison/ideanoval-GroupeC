@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.humanbooster.ideanoval.business.ClassementBrains;
 import fr.humanbooster.ideanoval.business.ClassementBuzzs;
@@ -16,7 +17,6 @@ import fr.humanbooster.ideanoval.business.Utilisateur;
 import fr.humanbooster.ideanoval.dao.ClassementBrainsDao;
 import fr.humanbooster.ideanoval.dao.ClassementBuzzsDao;
 import fr.humanbooster.ideanoval.dao.ClassementTopsDao;
-import fr.humanbooster.ideanoval.dao.LigneClassementIdeeDao;
 import fr.humanbooster.ideanoval.dao.LigneClassementUtilisateurDao;
 import fr.humanbooster.ideanoval.service.ClassementService;
 import fr.humanbooster.ideanoval.service.UtilisateurService;
@@ -27,6 +27,7 @@ import fr.humanbooster.ideanoval.service.UtilisateurService;
  * 
  * @author Frederic Moussiegt
  */
+@Service
 public class ClassementServiceImpl implements ClassementService {
 
 	@Autowired
