@@ -87,7 +87,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	public Utilisateur findUtilisateurByPseudo(String pseudo) {
 		try {
 			@SuppressWarnings("unchecked")
-			Query<Utilisateur> query = sessionFactory.getCurrentSession().createQuery("FROM Utilisateur u WHERE u.pseudo=:Up");
+			Query query = sessionFactory.getCurrentSession().createQuery("FROM Utilisateur u WHERE u.pseudo=:Up");
 			query.setString("Up", pseudo);
 			Utilisateur utilisateur = (Utilisateur) query.uniqueResult();
 			return utilisateur;
@@ -101,7 +101,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	@Transactional(readOnly = true)
 	public Utilisateur findUtilisateurByMail(String mail) {
 		try {
-			Query<Utilisateur> query = sessionFactory.getCurrentSession().createQuery("FROM Utilisateur u WHERE u.mail=:Um");
+			Query query = sessionFactory.getCurrentSession().createQuery("FROM Utilisateur u WHERE u.mail=:Um");
 			query.setString("Um", mail);
 			Utilisateur utilisateur = (Utilisateur) query.uniqueResult();
 			return utilisateur;
@@ -117,7 +117,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	public List<Utilisateur> getBrains() {
 		List<Utilisateur> result = new ArrayList<>(10);
 		try {
-			Query<Utilisateur> query = sessionFactory.getCurrentSession().createQuery("SELECT u FROM Utilisateur u, Idee i GROUP BY i.idUtilisateur ORDER BY count(i.idUtilisateur) DESC");
+			Query query = sessionFactory.getCurrentSession().createQuery("SELECT u FROM Utilisateur u, Idee i GROUP BY i.idUtilisateur ORDER BY count(i.idUtilisateur) DESC");
 			query.setMaxResults(10);
 			result = query.list();
 			return result;
